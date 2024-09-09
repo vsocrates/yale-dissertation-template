@@ -2,19 +2,90 @@
 
 \section{Motivation}
 
-The problem of good boy behavior has been well established in the literature.
-We follow the convention of \citet{Neyman1923Application} for the potential outcomes model.
-Moreover, we build on the work of \citet{Harshaw2021Balancing} and \citet{harshaw2021design} for design and analysis of experiments.
-We really cited these just so we'd have a non-empty bibliography.
+Uncertainty is an inherent component in clinical decision making. Despite our best efforts in biology, medicine, and pharmacology, significant gaps in our knowledge of the human body often lead to the adage that medicine is more an art than a science. Several theories have been put forth regarding the medical reasoning process, including those of \citet{blois1984information} and \citet{paukerThresholdApproachClinical1980}. The majority of these theories propose clinical reasoning as a form of abductive, cyclical reasoning, establishing hypotheses given clinical evidence and then evaluating these hypotheses based on further testing. However, all wrestle with the underlying lack of complete information prior to a clinical decision. In this work, we conduct a series of decision-analytic experiments to investigate how the underlying uncertainty of a patient's state interacts with clinical cognition in an state-of-the-art \textit{in-silico} language modeling system: the large language model. 
 
-In order to ensure that we have made proper use of the \texttt{figure} directory, we should create a figure.
-Figure~\ref{fig:handsome-dan} shows the optimal good boy, the original Handsome Dan.
-Finally, we end this motivation with nonsense text to fill it out.
+Our experiments initially establish a theory of clinical uncertainty quantification in LLMs, before evaluating diagnostic decision making in increasingly complex scenarios. In Chapter~\ref{chapter:calibration}, we will evaluate LLM calibration under a complex, real-world clinical decision making task requiring expertise and gestalt. Following an investigation into uncertainty quantification, in Chapter~\ref{chapter:race-bayes} we further explore how our theory of clinical uncertainty influences Bayesian diagnostic reasoning in the LLM. We also see whether racial biases influence this Bayesian reasoning. Finally, in Chapter~\ref{chapter:bn-reasoning}, we extend the initial diagnostic reasoning task to a complete clinical evaluation scenario, framed as a sequential information seeking decision process.
 
-\begin{figure}
-	\centering
-	\includegraphics{figures/handsome-dan}
-	\caption{Optimal Good Boy} \label{fig:handsome-dan}
-\end{figure}
+\section{Paradigms in Clinical Cognition}
 
-\Blindtext
+In order to frame the LLM as a clinical cognition experiment participant, we must first understand prevailing theories in clinical cognition in humans. There are currently two main paradigms that we will describe here. 
+% Here, we will talk about the two paradigms in clinical cognition: the cognitive, descriptive, problem solving approach and the more probability-grounded, decision-analytic approach. 
+
+\subsection{The Problem-Solving Approach}
+As a subset of human cognition, clinical cognition has often been investigated through cognitive science methods and principles. The first major investigations into physician information processing using cognitive science methods began with the seminal work of \citet{elstein1978medical} in their series of experiments, entitled the \emph{Medical Inquiry Project} research program. In it, they conduct a series of "think-aloud" or verbalization studies in which they have physicians evaluate standardized patients while verbalizing their reasoning. They also play recordings of the interviews back to the physician and record more quantitative findings, such as the accuracy of the final diagnosis and the number of hypotheses generated at various stages in the interview. Finally, they combined these high-cost experiments with cheaper, vignette-based evaluations in both expert physicians and medical students, with the goal of identifying a generalized cognitive framework of clinical decision making that potentially differentiated successful and unsuccessful diagnosticians.
+
+% we don't need to describe the experiments but what are the ideological outcomes from them and why they matter. also why they are right/wrong. 
+% IEEE transactions citation style
+
+While they were unable to determine the cognitive framework that differentiated effective diagnosis, they identified that all physicians followed a \emph{Hypothetico-deductive reasoning} process. This cognitive framework described a process by which physicians generated a limited set (4 $\pm$ 1) of hypotheses early in the exam and used them to guide further data collection. This work was also inspired the seminal work on information processing by \citet{simonHumanProblemSolving1971}, in which they describe problem-solving as a search through an operator space from an \emph{initial state} to a \emph{goal state}. 
+
+The hypothetico-deductive reasoning framework has influenced much of the clinical cognition research to date. While \citet*{elstein1978medical} did not take into account the role of expertise in differentiating "expert" and "subexpert" diagnosticians, future work incorporated expertise with a novel \emph{forward reasoning} process to propose a counter to the hypothetico-deductive reasoning process \citep{patelKnowledgeBasedSolution1986}. The authors developed a causal network of the pathophysiology frame of a patient with acute bacterial endocarditis being diagnosed by cardiologists. They placed the propositions derived from a recall protocol as leaf nodes, allowing them to determine that causal rules flowed from the physician's knowledge base of pathology "forward" to the description of the patient, rather than "backward". They further identified that subexpert cardiologists that arrived at the incorrect diagnosis performed a hybrid process of forward and backward reasoning, rather than simply forward reasoning. They conclude that experts begin their reasoning process in their knowledge base, rather than by developing hypotheses. 
+
+In addition to the being the impetus for the development of the current problem-solving approach, the work of \citet*{elstein1978medical} also triggered a body of literature based more on probability and decision analysis. 
+
+\subsection{The Decision-Analytic Approach}
+The decision-analytic approach to clinical cognition forgoes protocol methods eliciting cognitive processes from experts and assumes a normative model of decision making that expert and subexpert physicians should adhere to, often based on a Bayesian or utility-based model. The first work in this space established a two stage clinical reasoning model based on aligning symptom complexes with disease complexes. In the first stage, a set of potential diagnoses are identified based on patient symptoms. In the second, a decision-analytic approach is taken to determine the conditional likelihood of a disease, given a symptom complex and lab tests. This process is iterated upon until the final diagnosis is reached \citep{ledley1959reasoning}. 
+
+As previously discussed, judgement under uncertainty is core aspect of medical decision making. Rather than evaluate probabilities and predict the likelihood of a future event, significant work has been done on the use of \emph{heuristics} that simplify decision making under uncertainty \citep{tverskyJudgmentUncertaintyHeuristics1974a}. The existence of such heuristics in the clinical domain was quickly theorized \cite{eddyProbabilisticReasoningClinical1982}. Studies in the lab have also experimentally validated the existence of a number of biases that arise from such heuristics, including anchoring \citep{friedlanderAnchoringPublicityEffects1983}, confirmation bias \citep{klaymanDebiasEnvironmentInstead1993}, and framing effects \citep{mcneilElicitationPreferencesAlternative1982}. Much of this work is validated using a normative frame, in which either expected utility or Bayesian-optimal function is used to determine the "ideal" state \citep{camererProcessperformanceParadoxExpert1991}. 
+
+In the clinical setting, 
+
+
+% There have been two primary approaches to research investigating clinical reasoning in medicine – the decision–analytic approach and the information-processing or problem- solving approach. Decision analysis uses a formal quantitative model of inference and decision making as the standard of comparison (Dowie&Elstein,1988).It compares the performance of a physician with the mathematical model by focusing on reasoning “fallacies” and biases inherent in human clinical decision making (Leaper et al.). In contrast, the information-processing approach focuses on the description of cognitive processes in reasoning tasks and the development of cognitive models of performance, typically relying on protocol analysis (Ericsson and Simon, 1 9 9 3 ) and other observational techniques. --> From Thinking and Reasoning in Medicine by Patel, Arocah, and Zhang Chapter 30 Handbook of Thinking
+
+Other components to include: 
+
+\begin{enumerate}
+    \item where they come from they from
+    \item How do they differ (pros and cons list below)
+    \item why I picked one over the other
+\end{enumerate}
+
+
+Pros and cons:
+\begin{itemize}
+    \item Pros of the decision-approach: it has a ground truth to work towards, it has the ability to educate prospectively, assuming that the probabilities are correct. evidence that system 1/2 thinking is common, and heuristics/biases do negatively impact physicians
+    \item Cons of the decision-approach: it might be simplification (it doesn't take into account teams, tech collaboration, that the heuristics may actually be correct,  other issues around the patient (e.g. socioeconomic factors)) | expertise is a key component here, and that impacts the cognition (more expertise, better heuristics, more likely to work in the problem solving, intuitive way)
+\end{itemize}
+
+\subsection{Why did we pick one over the other?}
+We picked the decision-analytic frame for a variety of reasons. The first being that it allows us to constrain the problem to a ground truth answer. In the descriptive, information-processing approach, we are limited to describe and classify the cognitive processes of cognition, but aren't able to determine if they are accurate or not. While we agree with proponents of the information-processing approach who maintain that the biases or "fallacies" identified by normative approaches may in fact be a function of irrational, but otherwise meaningful, components of clinical care (e.g. patient requests, cost considerations, etc.), this is predominantly a function of expertise \cite{patel1991general}. Namely, expert physicians working in their area of expertise, often employ heuristics such as confirmation bias successfully, as compared to subexperts \cite{patelEmergingParadigmsCognition2002a}.
+
+This is important in our discussion because we view the LLM as a subexpert clinical decision maker. As shown in a variety of work \cite{}, while state-of-the-art LLMs perform well on some tasks, they are still far from expert clinical reasoners \cite{harrisLargeLanguageModels2023}. Therefore, we believe that we can use a more decision-analytic framework to evaluate them, rather than assume that their biases are a function of expertise, and therefore valid decision making practice.
+
+
+% I think a better argument here would be that the LLM represents some form of collective intelligence, and therefore isn't considered an expert on any particular clinical domain. (Cite the fact that there is considerable variation across medical specialities/subject matter - https://ai.nejm.org/doi/full/10.1056/AIoa2300151#f2). It is instead a subexpert generalist clinical decision maker. 
+
+% I do not believe the LLM represents collective intelligence by any of the definitions that currently exist. (It isn't better than any single member in the group) (It also does not exist as a coherent intelligent organism working with one mind, despite being a collection of independent agents) -> Handbook of collective intelligence - Malone
+
+% Another reason that it makes sense to use a normative approach is that, one of the main critiques of decision-reaserach is that humans are not bayesian thinkers (cite From Tools to Theories: A Heuristic of Discovery in Cognitive Psychology), and therefore we cannot use the a Bayesian grounding for the normative state. This isn't true for LLMs, as they have been shown to understand and be able to employ Bayes' rule very effectively (in our work, Chapter 2, and in others). Now, the critique that the Bayesian approach may not be the "optimal" decision making methodology is harder to test. 
+
+% We aren't restricting ourselves to one or the other really: "Problem-solving research emphasizes the sequential process of searching for a solution path, whereas decision research focuses more on the nature of the decision outcome and how it may deviate from an acceptable normative standard." -> Emerging paradigms
+ 
+\section{LLMs as Candidate Models of Clinical Sublanguage Processing}
+\begin{itemize}
+    \item There does not currently exist a good linguistic model of the clinical sublanguage
+    \item Specifically, we know that 
+    \item LLMs can potentially be a good linguistic theory (they have their own inductive biases, requirements, and abilities)
+    \item Based on empirical results, they seem to be close to human performance on benchmarks ("similar behavioral outputs are arguably a necessary prerequisite for an artificial model to serve as a candidate model of some biological system." - Tuckute, Kanwisher, Fedorenko, 2024), so they are worth investigating as such a linguistic model.
+    \item we take the important question of uncertainty understanding/modeling as the question of interest
+\end{itemize}
+
+\subsection{Harris' Sublanguage Theory}
+
+
+\section{Using the LLM in a Clinical Cognition Study of Language}
+Here, we provide a brief overview of Zellig Harris' theory of sublanguage. For our purposes, this will provide background for a view of the clinical sublangauge, so far as it has been constructed. Moreover, it will allow us to view the large language model as a novel, generative theory on the clinical sublanguage. This motivates our use of it in a cognitive study of uncertainty. 
+
+% We are looking at language as a product, not production. I know that the study of language in and in of itself, and the clinical sublnguage is necessary for various reasons. There is a cognitive frame of the physician and the clinical sublanguage. I acknowledge that they exist and they exist over the larger frame of what I'm trying to do. 
+
+% we seek to analyze the LLM as a model of cognition that borrow from both. 
+
+% Figure~\ref{fig:handsome-dan}
+
+% \begin{figure}
+% 	\centering
+% 	\includegraphics{figures/handsome-dan}
+% 	\caption{Optimal Good Boy} \label{fig:handsome-dan}
+% \end{figure}
+

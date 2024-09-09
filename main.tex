@@ -12,7 +12,9 @@
 \usepackage[format=plain,font=small,labelfont=bf,textfont=up]{caption}
 \usepackage{graphicx}
 
-\usepackage{natbib}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+
 \usepackage{setspace}
 \setstretch{1.05}
 
@@ -27,6 +29,14 @@
 \usepackage{blindtext} % used only for generating fake text
 
 \usepackage[hidelinks]{hyperref} % this should go last apparently?
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=violet,
+}
 
 \input{content/commands}
 
@@ -66,9 +76,13 @@
 
 \input{content/intro}
 
+\input{content/related-work}
+
 \input{content/chapter-1}
 
 \input{content/chapter-2}
+
+\input{content/chapter-3}
 
 %%%%%%%%%%%%%%%%%
 % Bibliography

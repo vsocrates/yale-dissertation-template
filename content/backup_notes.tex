@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% From the section in Introduction on "An LLM as a Participant in a Cognitive Clinical Study of Uncertainty"
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{itemize}
+%     \item There does not currently exist a good linguistic model of the clinical sublanguage
+%     \begin{enumerate}
+%         \item What is a sublanguage? $\rightarrow$ describe Harris' theory
+%         \item Describe the immunological frame
+%         \item We discuss what an effective sublanguage looks like (the FoG system by Kitterdge).
+%         \item Why the clinical sublanguage isn't a good one: Specifically, we know that there seems to be different frequencies of semantic concepts by clinical subject. Does that mean each of these is a clinical sublanguage? If so, how deep into subspecialities do we need to go? Or is it the context (pragmatics) of the note the physician is writing that dictates the sublanguage? That also seems to matter.
+%         \item David seems to believe there is a single clinical sublanguage and there are only dialects but I disagree. The closest anyone has come to a sublanguage doesn't fit with other types of clinical text because the contexts are too different.
+%     \end{enumerate}    
+%     \item LLMs can potentially be a good linguistic theory (they have their own inductive biases, requirements, and abilities) $\rightarrow$ point to the paper on LLMs as Linguistic Theories by someone. The reason it can be considered a linguistic theory is because it redefines some of the needs for existing 
+%     \item Based on empirical results, they seem to be close to human performance on benchmarks ("similar behavioral outputs are arguably a necessary prerequisite for an artificial model to serve as a candidate model of some biological system." - Tuckute, Kanwisher, Fedorenko, 2024), so they are worth investigating as such a linguistic model.
+%     \item we take the important question of uncertainty understanding/modeling as the question of interest
+% \end{itemize}
+
+% Questions to answer: 
+
+% Why is a sublanguage different from a dialect, and how does that influence note type, presentation, etc. 
+
+% style, register, dialect, routine, and sublanguage
+% dialect: 'a habitual variety of a language set off from all other such habitual varieties by a unique combination of language features'. also usually defined as two language varieties that have significant mutual intelligibility.
+
+% The next two are more related to the relationships between communicators rather than the speaker. They are also more likely to mostly be normal or standard. All styles and registers of English have SV agreement, but not all dialects
+% style: Examples include intimacy/distance, casualness/formality, deference/dominance, peremptoriness/politeness. a newspaper headline can be formal or conversational.
+% register: like styles, but related to "specific contenxts or situations and with specific functions of language in those contexts". It can also be related to style as 'a functional style [register] is a system of interrelated language means which serves a definite aim in communication'. Newspaper headlines and recipes count as registers.
+% all 3 have three types of selection:
+% 1. exclusion of certain features (object pronoun 'whom' is excluded in Black English, or contracted verbs are not used in formal language "He has finished his novel").
+%  2. special freedom is given for certain features ("He be sick" in Black English or "TWO SUSPECTS APPREHENDED" in the newspaper headlines register)
+% 3. statistical preference for certain features are given ("I had thought it was easy" occurs more often than "I thought it was easy" in BE, or modified nouns in recipes register: "ice-cold shrimp nestled on fresh lettuce" rather than "shrimp on lettuce"). 
+ 
+% finally, routines are like registers: "in having associated with them a set of characteristic linguistic features, but which differ from them in not being closely identified with specific contexts and/or uses". These would be like rhyming couplets. Example: a rhyming couplet in iambic pentameter can appear in the English of El Paso or Liverpool, in formal style or in casual style, in baby talk or headline register.
+
+% A sublanguage has constraints on the word-occurrence of particular types of word-classes in a grammatical structure: "we find that word subclasses can be defined such that members of one subclass but not of another occur in particularpositions relative to some yet other subclass" 
+
+% #### Differences b/w dialect and sublanguage
+% A sublanguage is defined by a grammar that has subclasses of words based on co-occurrence. Certain subclasses can only exist in certain syntactic structures with respect to other words. Example: "molecule-nouns can be distinguished from other nouns by the fact that they can appear as objets of the subclass of verbs including 'wash'". Conversely, a dialect doesn't have such coocurrence requirements. Instead, there are simply grammatical features that differ with respect to some reference dialect. 
+
+% It could be argued that all text generated in the clinical domain is part of the clinical sublanguage, and the various use cases are dialects of the language. However, based on Harris' definition, this seems unlikely. If that was the case, we wouldn't have abbreviation disambiguation issues. However, the subject matter makes a large difference in the word class defintion. 
+
+
+% TODO: Under what constraints does it fail less. 
+
+% Why are current models of distributional semantics sufficient/not to define a sublanguage <- A question that Hua might ask, parse what it means for David
+
+% The current models of distributional semantics are not sufficient to define a sublanguage because there are no explicit restrictions on word classes in the sentence structure. While there is heavy nudges towards certain word classes (by distributional differences), there is nothing explicitly stopping a sentence being formed that is outside of the sublanguage. 
+
+% TODO: What level of linguistic context are the LLMs able to interpret. 
+
+% - mention the line of reasoning on the need for a hierarchical inductive bias in architectures, which LLMs don't have explicitly: (Tom McCoy, grow on trees + how poor is the stimulus) the inductive bias of LLMs may be enough to learn this structure, but also we might need explicit hierarchical structure (memory).
+
+% TODO: I'm using this particular linguistic theory that represents a clinical sublanguage. Does the LLM work for that? and how does the LLM model it? 
+% TODO: Backup that LLMs use BPE, but can still understand the clinical information object we are focusing on in Aim 3: https://arxiv.org/pdf/2306.17649, boom done.
+% #### TODO: We are using this combination in Aim 3, where we actually look at if the LLM can handle the uncertainty associated with pieces of information in a clinical sentence. 
+% We also need to back up that they are well-calibrated in clinical text.
+% Finally, just because they can form clinical information concepts from BPE, doesn't mean that they are able to stick to word classes. They seem to be able to: https://arxiv.org/pdf/2205.12689
+
+% We have PHI limitations. Even after de-identification, we must restrict our data to be run locally or on a secure Azure platform. Therefore, most deployed open models cannot be used. Furthermore, it is well known that the types of reasoning we want to investigate is not possible with simpler LLMs, so we cannot default to smaller scale LMs. We also cannot deploy larger LMs locally due to hardware limitations. Therefore, we are limited to OpenAI models, while they are still black-boxes. 
+
+% Do the counterfactual of why an LLM is a bad theory of linguistic theory
+
+% They are bad linguistic theories because they aren't deterministic and thereby inherently not rule-based. They are also not ground-up theories, built from constituent parts of language (such as syntax, semantic, and discourse elements). 
+
+% ^ Why are we going to forege ahead anyway? Why do we care about LLMs to begin with, what are they as a product of next step in huamn langauge?
+
+
+% TODO: Are you defending each part effectively. 
+% TODO: Anaphora resolution in clinical language can lead to different parses, leading to uncertianty in the grammar itself. 
+
+
+% Why are you doing what you're doing and why is it important? 
+
+% We are looking at language as a product, not production. I know that the study of language in and in of itself, and the clinical sublnguage is necessary for various reasons. There is a cognitive frame of the physician and the clinical sublanguage. I acknowledge that they exist and they exist over the larger frame of what I'm trying to do. 
+
+% we seek to analyze the LLM as a model of cognition that borrow from both. 
+
+

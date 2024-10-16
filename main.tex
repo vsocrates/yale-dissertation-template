@@ -13,20 +13,20 @@
 \usepackage{graphicx}
 
 \usepackage[square,numbers]{natbib}
-\bibliographystyle{abbrvnat}
+\bibliographystyle{IEEEtranN}
 
 \usepackage{setspace}
 \setstretch{1.05}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
+\usepackage{amsmath,amsfonts,amssymb, amsthm}
+% \numberwithin{equation}{section}
 \usepackage{bbm}
 \usepackage{mathtools}
-\mathtoolsset{showonlyrefs,showmanualtags}
+\mathtoolsset{showmanualtags}
 \usepackage{xcolor}
 
-\usepackage{blindtext} % used only for generating fake text
+\usepackage{csquotes}
+\usepackage{wrapfig}
 
 \usepackage[hidelinks]{hyperref} % this should go last apparently?
 
@@ -39,7 +39,7 @@
 }
 
 \input{content/commands}
-
+% \doublespacing
 \begin{document}
 	
 %%%%%%%%%%%%%%%%%
@@ -83,6 +83,8 @@
 \input{content/chapter-2}
 
 \input{content/chapter-3}
+
+\input{content/conclusion}
 
 %%%%%%%%%%%%%%%%%
 % Bibliography

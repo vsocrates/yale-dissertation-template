@@ -1,6 +1,16 @@
 \chapter{Uncertainty Quantification in a Real-World Clinical Task: Deprescribing} \label{chapter:deprescribing}
 
 \section{Introduction}
+The goal of this thesis is to evaluate UQ and thereby also evaluate Bayesian diagnostic reasoning capabilities of LLMs. A prerequisite to Bayesian diagnostic reasoning is effective uncertainty quantification, as the LLM must be able to quantify the uncertainty associated with a differential list of diagnoses. It must also be able to update 
+% How is Chapter 1 related to Chapters 2 and 3
+% In 1, we do two things related to uncertainty. We have the LLM make predictions and use confidence to improve predictions
+% In 2, we have the LLM estimate diagnostic risk of disease before and after a test. In 3, we do the same thing, but we have it use it's estimate of disease risk to make decisions on what the next step should be. 
+% What I should've done for 1 is have the LLM the risk of some disease in a real world setting, like for the HEART score. terrible.
+% How is uncertainty quantification related to diagnostic risk? 
+% The unceratitny that we're quantifying in this case is the U around disease vs. uncertainty in its own decision. 
+% How do we merge the two? 
+% Can we argue that we need to be able to understand uncertainty about decision to understand uncertainty in disease estimation? Not really... Maybe we can say that the LLM determines whether a medication shoujld be deprescxribed or not, it weighs the benefit vs the risk to patient. 
+
 \section{Methods}
 \section{Results}
 \section{Discussion}

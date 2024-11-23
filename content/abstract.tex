@@ -6,8 +6,8 @@
 \end{center}
 
 \begin{spacing}{2}
-	
-	 
+
+This thesis establishes an initial theory of clinical uncertainty in black-box large language models (LLMs) through experiments conducted across diverse clinical contexts. We begin by evaluating an LLM's ability to manage qualitative uncertainty in a real-world task: deprescribing medications based on clinical notes. While the LLM effectively identifies deprescribing criteria, its assigned role adversely influences its reasoning, leading to logical errors and unwarranted recommendations as it attempts to align with the perceived requirements of the task. Next, we investigate how clinical context influences the LLM's internal model of uncertainty by examining its ability to estimate post-test probabilities following diagnostic test results. Our findings reveal substantial disease-specific variability in the LLM's estimation of diagnostic test performance, highlighting its limited understanding of real-world clinical probabilities, even within a probabilistic framework. In the final chapter, we integrate these findings in a conversational diagnostic task involving chest pain patients presenting to the emergency department. By evaluating two prompting strategies: (1) removing disease-specific role information and (2) incorporating probabilistic information via prevalence data for rare, life-threatening conditions, we demonstrate that LLMs remain poorly calibrated to real-world clinical probabilities and struggle to adapt their uncertainty models to assigned roles. This theory underscores the critical need for structured integration of probabilistic information into LLMs to align them more closely with clinical reasoning. We conclude by advocating for further development of LLMs that better emulate clinical decision-making processes, aiming to enhance human-AI collaboration and ultimately improve patient care outcomes.
 
 \end{spacing}
 

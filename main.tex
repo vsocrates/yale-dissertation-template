@@ -5,6 +5,7 @@
 \usepackage{etoc}
 
 % packages used
+\usepackage{float} 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -27,6 +28,10 @@
 
 \usepackage{csquotes}
 \usepackage{wrapfig}
+\usepackage{multirow} 
+
+\usepackage{booktabs}
+
 
 \usepackage[hidelinks]{hyperref} % this should go last apparently?
 
@@ -39,9 +44,8 @@
 }
 
 \input{content/commands}
-% \doublespacing
+\doublespacing
 \begin{document}
-	
 %%%%%%%%%%%%%%%%%
 % Preamble to Dissertation
 %%%%%%%%%%%%%%%%%
@@ -73,7 +77,7 @@
 %%%%%%%%%%%%%%%%%
 % Main Body of Dissertation
 %%%%%%%%%%%%%%%%%
-
+% \begin{doublespace}
 \input{content/intro}
 
 \input{content/related-work}
@@ -85,7 +89,7 @@
 \input{content/chapter-3}
 
 \input{content/conclusion}
-
+% \end{doublespace}
 %%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%
@@ -107,6 +111,6 @@
 \etocsettagdepth{mtappendix}{subsection}
 \tableofcontents
 
-\include{content/appendix}
+\include{content/supplement}
 
 \end{document}
